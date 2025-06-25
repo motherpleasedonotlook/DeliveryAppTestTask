@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "DeliveryApp - Test Task";
+}
+
+<div class="container main-container">
+    
+    <main class="text-center">
+        <h1 class="display-4">Добро пожаловать!</h1>
+        
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <p class="lead">Вы авторизованы как @User.Identity?.Name</p>
+            <a href="#createOrderModal" class="btn btn-primary me-2" data-bs-toggle="modal">Создать заказ</a>
+        }
+        else
+        {
+            <p class="lead">Для работы с системой требуется авторизация</p>
+            <div class="mt-4">
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg btn-primary me-3">Вход в систему</a>
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-lg btn-outline-primary">Регистрация</a>
+            </div>
+        }
+    </main>
+    
+    <!-- модальное окно создания заказа -->
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Html.PartialAsync("_CreateOrderModal")
+    }
+
+    <!-- отображение сообщений -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+</div>
+<style>
+    header {
+        background-color: #f8f9fa;
+        padding: 0 20px;
+        border-radius: 8px;
+    }
+
+    .main-container {
+        padding: 100px 0;
+        background: url('/images/delivery-main.jpg') no-repeat center center;
+        background-size: cover;
+        border-radius: 8px;
+        color: white;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        min-height: calc(100vh - 150px);
+    }
+</style>

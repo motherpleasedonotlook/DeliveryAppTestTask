@@ -1,0 +1,39 @@
+﻿@model DeliveryApp.Models.ViewModels.OrderDetailsViewModel
+
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Заказ № @Model.OrderNumber</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Город отправителя</label>
+                    <input class="form-control" value="@Model.SenderCity" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Адрес отправителя</label>
+                    <input class="form-control" value="@Model.SenderAddress" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Город получателя</label>
+                    <input class="form-control" value="@Model.ReceiverCity" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Адрес получателя</label>
+                    <input class="form-control" value="@Model.ReceiverAddress" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Вес груза (кг)</label>
+                    <input class="form-control" value="@Model.Weight" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Дата забора груза</label>
+                    <input class="form-control" value="@Model.PickupDate.ToString("dd.MM.yyyy")" readonly>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
